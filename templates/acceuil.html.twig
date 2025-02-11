@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container text-center">
+		<h1 class="mt-5">AS'Elec - Électricité Générale à Strasbourg</h1>
+		<p class="lead">Votre partenaire pour des installations électriques sûres et fiables.</p>
+		<div class="row mt-5">
+			<div class="col-md-6">
+				<h2>Nos engagements</h2>
+				<ul class="list-unstyled">
+					<li>✅ Professionnalisme</li>
+					<li>✅ Qualité des installations</li>
+					<li>✅ Respect des délais</li>
+				</ul>
+			</div>
+			<div class="col-md-6">
+				<h2>Nos services</h2>
+				<ul class="list-unstyled">
+					<li>🔧 Installation électrique</li>
+					<li>🔧 Dépannage urgent</li>
+					<li>🔧 Rénovation électrique</li>
+				</ul>
+			</div>
+		</div>
+		<a href="{{ path('app_service') }}" class="btn btn-primary mt-3">Découvrez nos services</a>
+		<a href="{{ path('app_contact') }}" class="btn btn-secondary mt-3">Nous contacter</a>
+	</div>
+{% endblock %}

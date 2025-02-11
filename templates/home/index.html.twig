@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprise d'Électricité
+{% endblock %}
+
+{% block body %}
+	<header>
+		<h1>Entreprise</h1>
+		<nav class="navbar bg-primary text-center" data-bs-theme="dark">
+			<a href="#service">Service</a>
+			<a href="#contact">Contact</a>
+		</nav>
+
+	</header>
+
+	<div class="container" id="services">
+		<h2>Nos Services</h2>
+		<div class="service-box">
+			<h2>Installation Électrique</h2>
+			<p>Nous offrons des services complets d'installation électrique pour tous types de bâtiments.</p>
+		</div>
+		<div class="service-box">
+			<h2>Dépannage Électrique</h2>
+			<p>Service rapide et efficace pour tous vos besoins de dépannage en urgence.</p>
+		</div>
+		<div class="service-box">
+			<h2>Systèmes Informatiques</h2>
+			<p>Installation et maintenance de systèmes informatiques pour un réseau performant et sécurisé.</p>
+		</div>
+	</div>
+
+	<div class="contact" id="contact">
+		<h2>Contactez-nous</h2>
+		<p>Téléphone : 07 23 45 67 89</p>
+		<p>Email : contact@gmail.com</p>
+		<p>Adresse : 123 Rue de l'Énergie, 67100 Strasbourg</p>
+	</div>
+{% endblock %}
