@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprise d'Électricité
+{% endblock %}
+
+{% block body %}
+
+	<header class="header-bg">
+		<h1>AS'Elec - Électricité Générale à Strasbourg</h1>
+		<br>
+		<p>Votre partenaire pour des installations électriques sûres et fiables.</p>
+
+		<nav class="navbar bg-primary w-100 d-flex justify-content-center" data-bs-theme="dark">
+			<a href="{{ path('app_service') }}" class="mx-3 text-white">Service</a>
+			<a href="contact" class="mx-3 text-white">Contact</a>
+			<a href="devis" class="mx-3 text-white">Devis</a>
+			<a href="realisation" class="mx-3 text-white">Réalisations</a>
+		</nav>
+	</header>
+	<div class="container">
+		<div class="service-box">
+			<h1>Nos Engagements</h1>
+		</div>
+	</div>
+
+	<div class="contact" id="contact">
+		<h2>Contactez-nous</h2>
+		<p>Téléphone : 07 23 45 67 89</p>
+		<p>Email : contact@gmail.com</p>
+		<p>Adresse : 123 Rue de l'Énergie, 67100 Strasbourg</p>
+	</div>
+</div>{% endblock %}

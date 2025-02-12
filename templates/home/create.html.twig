@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un Devis
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h2>Créer un Devis pour une Installation Électrique</h2>
+		{{ form_start(form) }}
+		{{ form_row(form.clientNom) }}
+		{{ form_row(form.clientEmail) }}
+		{{ form_row(form.descriptionTravaux) }}
+		{{ form_row(form.montant) }}
+		<button type="submit" class="btn btn-primary">{{ form.submit.vars.label }}</button>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

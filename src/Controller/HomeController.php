@@ -8,13 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
-    #[Route('/acceuil', name: 'app_acceuil')]
-    public function acceuil(): Response
-    {
-        return $this->render('acceuil.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+
     #[Route('/contact', name: 'app_contact')]
     public function contact(): Response
     {
@@ -32,7 +26,21 @@ final class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/acceuil.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    #[Route('/realisation', name: 'app_realisation')]
+    public function realisation(): Response
+    {
+        return $this->render('home/realisation.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    #[Route('/devis', name: 'app_devis')]
+    public function devis(): Response
+    {
+        return $this->render('home/create.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
