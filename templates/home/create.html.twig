@@ -1,17 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer un Devis
+{% block title %}Demande de Devis
 {% endblock %}
 
 {% block body %}
 	<div class="container mt-5">
-		<h2>Créer un Devis pour une Installation Électrique</h2>
-		{{ form_start(form) }}
-		{{ form_row(form.clientNom) }}
-		{{ form_row(form.clientEmail) }}
-		{{ form_row(form.descriptionTravaux) }}
-		{{ form_row(form.montant) }}
-		<button type="submit" class="btn btn-primary">{{ form.submit.vars.label }}</button>
-		{{ form_end(form) }}
+		<h2 class="text-center mb-4">Demande de Devis</h2>
+		<div class="card p-4 shadow-lg">
+			{{ form_start(form) }}
+			<div class="row">
+				<div class="col-md-6">
+					{{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(form.prenom, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					{{ form_row(form.ville, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="col-md-6">
+					{{ form_row(form.adresse, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					{{ form_row(form.numero, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					{{ form_row(form.descriptionTravaux, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<label class="fw-bold">Type de logement</label>
+					<div class="form-check">
+						{{ form_widget(form.typeHabitat) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					{{ form_row(form.estimationTravaux, {'attr': {'class': 'form-select'}}) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					{{ form_row(form.plusDeDetails, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+			<div class="text-center mt-4"></div>
+			{{ form_end(form) }}
+		</div>
 	</div>
 {% endblock %}

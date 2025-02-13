@@ -85,4 +85,6 @@ body {
     background-repeat: no-repeat;
 
 }
-
+.card {
+    border-radius: 10px;
+}
