@@ -53,27 +53,8 @@ class Devis
     #[ORM\Column(type: "text", nullable: true)]
     private ?string $plusDeDetails = null;
 
-    #[ORM\Column(type: "datetime")]
+    #[ORM\Column(type: "datetime", nullable: true)]
     private \DateTimeInterface $dateCreation;
-
-    #[ORM\Column(type: "datetime")]
-    private \DateTimeInterface $devis;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    private ?string $email = null;
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-        return $this;
-    }
-
 
     public function getmailClient(): ?string
     {

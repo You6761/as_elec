@@ -7,7 +7,7 @@
 	<div class="container mt-5">
 		<h2 class="text-center mb-4">Demande de Devis</h2>
 		<div class="card p-4 shadow-lg">
-			{{ form_start(form) }}
+			{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 			<div class="row">
 				<div class="col-md-6">
 					{{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
@@ -58,14 +58,19 @@
 					{{ form_row(form.plusDeDetails, {'attr': {'class': 'form-control'}}) }}
 				</div>
 			</div>
-
-			<div class="text-center mt-4">
-				<button type="submit" class="btn btn-primary btn-lg">
-					<i class="bi bi-send"></i>
-					Envoyer
-				</button>
+			<div class="row">
+				<div class="col-md-12">
+					{{ form_row(form.mailClient, {'attr': {'class': 'form-control'}}) }}
+				</div>
 			</div>
+
+
 			{{ form_end(form) }}
+			{% for message in app.flashes('success') %}
+				<div class="flash-notice">
+					{{ message }}
+				</div>
+			{% endfor %}
 		</div>
 	</div>
 {% endblock %}

@@ -37,10 +37,17 @@ final class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-    #[Route('/devis', name: 'app_devis')]
-    public function devis(): Response
+    #[Route('/engagement', name: 'app_engagement')]
+    public function engagement(): Response
     {
-        return $this->render('home/create.html.twig', [
+        return $this->render('engagement.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    #[Route('/', name: 'home_acceuil')]
+    public function acceuil(): Response
+    {
+        return $this->render('home/acceuil.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

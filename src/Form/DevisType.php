@@ -4,13 +4,11 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\emailClient;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Devis;
@@ -24,6 +22,7 @@ class DevisType extends AbstractType
             ->add('prenom', TextType::class, ['label' => 'Prénom'])
             ->add('ville', TextType::class, ['label' => 'Ville'])
             ->add('adresse', TextType::class, ['label' => 'Adresse'])
+            ->add('mailClient', EmailType::class, ['label' => 'Adresse'])
             ->add('numero', NumberType::class, ['label' => 'Numéro de téléphone'])
             ->add('descriptionTravaux', TextareaType::class, [
                 'label' => 'Descriptif des travaux'

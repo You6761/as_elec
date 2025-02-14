@@ -1,20 +1,36 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-	<div class="container">
-		<h1 class="mt-5">Nos Services</h1>
-		<div class="row mt-4">
-			<div class="service-box col-md-4">
-				<h2>Installation électrique</h2>
-				<p>Nous réalisons des installations électriques conformes aux normes en vigueur.</p>
+	<div
+		class="container">
+		<!-- Section des services -->
+		<h2 class="mt-5 text-center text-white">Nos Services</h2>
+		<p class="text-center mt-3 text-white">
+			Découvrez nos prestations spécifiques pour répondre à tous vos besoins en matière d'électricité.
+		</p>
+
+		<!-- Container avec défilement horizontal pour les services -->
+		<div class="d-flex overflow-auto mt-4 gap-3" style="scroll-snap-type: x mandatory; scroll-behavior: smooth;">
+
+			<div class="service-box p-4 shadow-lg text-center rounded-4" style="flex-shrink: 0; flex-basis: 30%; min-height: 250px; background: rgba(0, 0, 0, 0.7); color: white; scroll-snap-align: start;">
+				<h2>🔧 Mise aux normes électriques</h2>
+				<p>Assurez la sécurité de vos installations en mettant vos équipements électriques aux normes avec nos experts qualifiés.</p>
 			</div>
-			<div class="service-box col-md-4">
-				<h2>Dépannage urgent</h2>
-				<p>Intervention rapide pour résoudre vos problèmes électriques.</p>
+			<div class="service-box p-4 shadow-lg text-center rounded-4" style="flex-shrink: 0; flex-basis: 30%; min-height: 250px; background: rgba(0, 0, 0, 0.7); color: white; scroll-snap-align: start;">
+				<h2>🛠️ Maintenance & Dépannage</h2>
+				<p>Intervention rapide pour résoudre tout problème électrique, que ce soit pour la réparation ou la maintenance de vos systèmes.</p>
 			</div>
-			<div class="service-box col-md-4">
-				<h2>Rénovation électrique</h2>
-				<p>Modernisation de vos installations électriques pour plus de sécurité.</p>
+			<div class="service-box p-4 shadow-lg text-center rounded-4" style="flex-shrink: 0; flex-basis: 30%; min-height: 250px; background: rgba(0, 0, 0, 0.7); color: white; scroll-snap-align: start;">
+				<h2>🏠 Installation de systèmes domotiques</h2>
+				<p>Automatisez votre maison ou votre bureau avec des solutions de domotique modernes et efficaces.</p>
+			</div>
+			<div class="service-box p-4 shadow-lg text-center rounded-4" style="flex-shrink: 0; flex-basis: 30%; min-height: 250px; background: rgba(0, 0, 0, 0.7); color: white; scroll-snap-align: start;">
+				<h2>☀️ Énergie solaire et panneaux photovoltaïques</h2>
+				<p>Optez pour des solutions écologiques et rentables en installant des panneaux solaires pour vos besoins énergétiques.</p>
+			</div>
+			<div class="service-box p-4 shadow-lg text-center rounded-4" style="flex-shrink: 0; flex-basis: 30%; min-height: 250px; background: rgba(0, 0, 0, 0.7); color: white; scroll-snap-align: start;">
+				<h2>🌐 Câblage informatique et réseau</h2>
+				<p>Installation de câblage pour réseaux informatiques ou connectivité haut débit dans vos locaux professionnels ou domestiques.</p>
 			</div>
 		</div>
 	</div>
