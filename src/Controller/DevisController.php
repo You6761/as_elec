@@ -43,4 +43,13 @@ class DevisController extends AbstractController
       'form' => $form,
     ]);
   }
+  #[Route('/devisliste', name: 'app_liste')]
+  public function liste(EntityManagerInterface $entityManager): Response
+  {
+    $demandes = $entityManager->getRepository(Devis::class)->findAll();
+
+    return $this->render('home/liste.html.twig', [
+      'demandes' => $demandes,
+    ]);
+  }
 }

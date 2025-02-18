@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des demandes de devis
+{% endblock %}
+{% block body %}
+	<div class="container mt-5">
+		<h2 class="text-center mb-4">Liste des demandes de devis</h2>
+		<div class="card p-4 shadow-lg">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Nom</th>
+						<th scope="col">Prénom</th>
+						<th scope="col">Ville</th>
+						<th scope="col">Adresse</th>
+						<th scope="col">Numéro</th>
+						<th scope="col">Description des travaux</th>
+						<th scope="col">Type de logement</th>
+						<th scope="col">Estimation des travaux</th>
+						<th scope="col">Plus de détails</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for demande in demandes %}
+						<tr>
+							<td>{{ demande.nom }}</td>
+							<td>{{ demande.prenom }}</td>
+							<td>{{ demande.ville }}</td>
+							<td>{{ demande.adresse }}</td>
+							<td>{{ demande.numero }}</td>
+							<td>{{ demande.descriptionTravaux }}</td>
+							<td>{{ demande.typeHabitat }}</td>
+							<td>{{ demande.estimationTravaux }}</td>
+							<td>{{ demande.plusDeDetails }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</tbody>
+		</table>
+	</div>
+</div>{% endblock %}

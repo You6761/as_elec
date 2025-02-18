@@ -22,7 +22,7 @@ class DevisType extends AbstractType
             ->add('prenom', TextType::class, ['label' => 'Prénom'])
             ->add('ville', TextType::class, ['label' => 'Ville'])
             ->add('adresse', TextType::class, ['label' => 'Adresse'])
-            ->add('mailClient', EmailType::class, ['label' => 'Adresse'])
+            ->add('mailClient', EmailType::class, ['label' => 'Mail'])
             ->add('numero', NumberType::class, ['label' => 'Numéro de téléphone'])
             ->add('descriptionTravaux', TextareaType::class, [
                 'label' => 'Descriptif des travaux'
@@ -37,7 +37,7 @@ class DevisType extends AbstractType
                 'expanded' => true, // Afficher en boutons radio
             ])
             ->add('estimationTravaux', ChoiceType::class, [
-                'label' => 'Estimation du temps des travaux',
+                'label' => 'Quand pensez-vous demarer les travaux ?',
                 'choices' => [
                     '1 mois' => '1_mois',
                     '2 mois' => '2_mois',

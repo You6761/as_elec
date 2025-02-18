@@ -31,6 +31,7 @@
 <body>
 
 	{# navbar #}
+
 	<nav class="navbar navbar-expand-lg navbar-light bg-light ">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="{{ path('app_home') }}"><img width="60" src="assets/images/ay.png" alt="logo as'elec"></a>
@@ -54,29 +55,36 @@
 						<a class="nav-link" href="{{ path('app_realisation') }}">Realisation</a>
 					</li>
 
+
 				</ul>
 
 			</div>
 			<h1 class="as">AS'Elec - Électricité Générale à Strasbourg</h1>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+			<ul>
+				<li class="nav-item">
+					<a class="nav-link text-primary fw-bold" href="login.php">🔑 Espace Admin</a>
+				</li>
+			</ul>
 
 		</div>
 	</nav>
 	{# <header class="header-bg">
-																													<h1>AS'Elec - Électricité Générale à Strasbourg</h1>
-																													<br>
-																													<p>Votre partenaire pour des installations électriques sûres et fiables.</p>
-																											
-																													<nav class="navbar bg-primary w-100 d-flex justify-content-center" data-bs-theme="dark">
-																											
-																														<a href="{{ path('app_service') }}" class="mx-3 text-white">Service</a>
-																														<a href="contact" class="mx-3 text-white">Contact</a>
-																														<a href="devis" class="mx-3 text-white">Devis</a>
-																														<a href="realisation" class="mx-3 text-white">Réalisations</a>
-																													</nav>
-																												</header> #}
+																																										<h1>AS'Elec - Électricité Générale à Strasbourg</h1>
+																																										<br>
+																																										<p>Votre partenaire pour des installations électriques sûres et fiables.</p>
+																																								
+																																										<nav class="navbar bg-primary w-100 d-flex justify-content-center" data-bs-theme="dark">
+																																								
+																																											<a href="{{ path('app_service') }}" class="mx-3 text-white">Service</a>
+																																											<a href="contact" class="mx-3 text-white">Contact</a>
+																																											<a href="devis" class="mx-3 text-white">Devis</a>
+																																											<a href="realisation" class="mx-3 text-white">Réalisations</a>
+																																										</nav>
+																																									</header> #}
 	{# <a href="{{ path('home_acceuil') }}" class="btn btn-outline-light position-absolute top-0 end-0 m-3">
-																																🏠 Retour à l'accueil
-																															</a> #}
+																																													🏠 Retour à l'accueil
+																																												</a> #}
 
 	<div class="container"> {% block body %}{% endblock %}
 		<footer>
