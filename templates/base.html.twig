@@ -34,16 +34,16 @@
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light ">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="{{ path('app_home') }}"><img width="60" src="assets/images/ay.png" alt="logo as'elec"></a>
+			<a class="navbar-brand" href="{{ path('app_home') }}"><img width="80" src="assets/images/AS.png" alt="logo as'elec"></a>
+
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+				<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="{{ path('app_service') }}">Service</a>
-
+						<a class="nav-link" href="{{ path('app_service') }}">Service</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
@@ -52,48 +52,81 @@
 						<a class="nav-link" href="{{ path('app_devis') }}">Devis</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_realisation') }}">Realisation</a>
+						<a class="nav-link" href="{{ path('app_realisation') }}">Réalisation</a>
 					</li>
-
-
 				</ul>
-
 			</div>
-			<h1 class="as">AS'Elec - Électricité Générale à Strasbourg</h1>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"></button>
-			<ul>
-				<li class="nav-item">
-					<a class="nav-link text-primary fw-bold" href="login.php">🔑 Espace Admin</a>
+			<!-- Section Admin (toujours visible sur ordinateur) -->
+			<div class="d-none d-lg-flex align-items-center ms-auto">
+				<ul
+					class="navbar-nav">
+					<!-- Dropdown pour Admin et Déconnexion -->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-person-lock"></i>
+							<span class="ms-1">Admin</span>
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							{% if is_granted('ROLE_ADMIN')  %}
+								<li>
+									<a class="dropdown-item" href="logout">
+										<i class="bi bi-box-arrow-right"></i>
+										Déconnexion
+									</a>
+								</li>
+							{% else %}
+								<li>
+									<a class="dropdown-item" href="login">
+										<i class="bi bi-person-lock"></i>
+										Espace Admin
+									</a>
+								</li>
+							{% endif %}
+
+						</ul>
+					</li>
 				</li>
 			</ul>
-
-		</div>
-	</nav>
-	{# <header class="header-bg">
-																																										<h1>AS'Elec - Électricité Générale à Strasbourg</h1>
-																																										<br>
-																																										<p>Votre partenaire pour des installations électriques sûres et fiables.</p>
-																																								
-																																										<nav class="navbar bg-primary w-100 d-flex justify-content-center" data-bs-theme="dark">
-																																								
-																																											<a href="{{ path('app_service') }}" class="mx-3 text-white">Service</a>
-																																											<a href="contact" class="mx-3 text-white">Contact</a>
-																																											<a href="devis" class="mx-3 text-white">Devis</a>
-																																											<a href="realisation" class="mx-3 text-white">Réalisations</a>
-																																										</nav>
-																																									</header> #}
-	{# <a href="{{ path('home_acceuil') }}" class="btn btn-outline-light position-absolute top-0 end-0 m-3">
-																																													🏠 Retour à l'accueil
-																																												</a> #}
-
-	<div class="container"> {% block body %}{% endblock %}
-		<footer>
-			<div class="contact" id="contact">
-				<h2>Contactez-nous</h2>
-				<p>Téléphone : 07 23 45 67 89</p>
-				<p>Email : contact@gmail.com</p>
-				<p>Adresse : 123 Rue de l'Énergie, 67100 Strasbourg</p>
-			</div>
-		</div>
-	</footer>
-</body></html>
+		</li>
+	</ul>
+</body></div><!-- Menu burger pour mobile --><div class="d-lg-none">
+<button class="navbar-toggler position-absolute top-0 end-0 m-3" type="button" data-bs-toggle="collapse" data-bs-target="#adminMenu"></button>
+<div class="collapse navbar-collapse" id="adminMenu">
+	<ul class="navbar-nav">
+		{% if is_granted('ROLE_ADMIN') %}
+			<li class="nav-item">
+				<a class="nav-link text-primary fw-bold d-flex align-items-center" href="login">
+					<i class="bi bi-person-lock"></i>
+					<span class="ms-2">Espace Admin</span>
+				</a>
+			</li>
+		{% endif %}
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<li class="nav-item">
+				<a class="nav-link text-danger fw-bold d-flex align-items-center" href="logout">
+					<i class="bi bi-box-arrow-right"></i>
+					<span class="ms-2">Déconnexion</span>
+				</a>
+			</li>
+		{% endif %}
+	</ul>
+</div></div></body></div></nav><div class="container"><div class="bg-white p-3 rounded shadow-sm"><h1 class="text-center mt-4">Électricité Générale à Strasbourg</h1><p class="text-center">Votre partenaire pour des installations électriques sûres et fiables.</p></div>{# <header class="header-bg">
+																																																																																																													<h1>AS'Elec - Électricité Générale à Strasbourg</h1>
+																																																																																																													<br>
+																																																																																																													<p>Votre partenaire pour des installations électriques sûres et fiables.</p>
+																																																																																																											
+																																																																																																													<nav class="navbar bg-primary w-100 d-flex justify-content-center" data-bs-theme="dark">
+																																																																																																											
+																																																																																																														<a href="{{ path('app_service') }}" class="mx-3 text-white">Service</a>
+																																																																																																														<a href="contact" class="mx-3 text-white">Contact</a>
+																																																																																																														<a href="devis" class="mx-3 text-white">Devis</a>
+																																																																																																														<a href="realisation" class="mx-3 text-white">Réalisations</a>
+																																																																																																													</nav>
+																																																																																																												</header> #}{# <a href="{{ path('home_acceuil') }}" class="btn btn-outline-light position-absolute top-0 end-0 m-3">
+																																																																																																																🏠 Retour à l'accueil
+																																																																																																															</a> #}<div class="container"> {% block body %}{% endblock %}<footer><div class="contact" id="contact">
+<h2>Contactez-nous</h2>
+<p>Téléphone : 07 23 45 67 89</p>
+<p>Email : contact@gmail.com</p>
+<p>Adresse : 123 Rue de l'Énergie, 67100 Strasbourg</p></div></div></footer></body></body></html>
