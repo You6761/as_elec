@@ -25,13 +25,6 @@ class DevisController extends AbstractController
       $entityManager->persist($devis);
       $entityManager->flush();
 
-      // $data = $form->getData();
-      // $mailer->sendEmail(
-      //   'destinataire@example.com',
-      //   'Nouveau message de ' . $data['nom'],
-      //   '<p>Email: ' . $data['mailClient'] . '</p>'
-      // );
-
       // Ajout du message flash
       $this->addFlash('success', 'Votre demande a bien été envoyée. Notre expert vous contactera sous peu.');
 
@@ -40,9 +33,10 @@ class DevisController extends AbstractController
     }
 
     return $this->render('home/create.html.twig', [
-      'form' => $form,
+      'form' => $form->createView(),
     ]);
   }
+
   #[Route('/devisliste', name: 'app_liste')]
   public function liste(EntityManagerInterface $entityManager): Response
   {
@@ -50,6 +44,24 @@ class DevisController extends AbstractController
 
     return $this->render('home/liste.html.twig', [
       'demandes' => $demandes,
+    ]);
+  }
+
+  #[Route('/devis/supprimer/{id}', name: 'app_devis_delete', methods: ['POST'])]
+  public function delete(Devis $devis, EntityManagerInterface $entityManager): Response
+  {
+    $entityManager->remove($devis);
+    $entityManager->flush();
+
+    $this->addFlash('success', 'La demande de devis a été supprimée avec succès.');
+
+    return $this->redirectToRoute('app_liste');
+  }
+  #[Route('/devis/afficher/{id}', name: 'app_devis_show')]
+  public function show(Devis $devis): Response
+  {
+    return $this->render('home/show.html.twig', [
+      'devis' => $devis,
     ]);
   }
 }

@@ -5,15 +5,44 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Service\FirebaseService;
+use App\Form\ContactType;
 
 final class HomeController extends AbstractController
 {
+    private FirebaseService $firebaseService;
 
-    #[Route('/contact', name: 'app_contact')]
-    public function contact(): Response
+    public function __construct(FirebaseService $firebaseService)
     {
+        $this->firebaseService = $firebaseService;
+    }
+    #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
+    public function contact(Request $request): Response
+    {
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $this->firebaseService->addcontact($data['name'], $data['email'], $data['message']);
+
+            $response = $this->contact->request(
+                'POST',
+                'https://aselec-5880b-default-rtdb.europe-west1.firebasedatabase.app/',
+                [
+                    'json' => [
+                        'name' => $data['name'],
+                        'email' => $data['email'],
+                        'message' => $data['message'],
+                    ],
+                ]
+
+            );
+            return $this->redirectToRoute('app_contact');
+        }
         return $this->render('contact.html.twig', [
-            'controller_name' => 'HomeController',
+            'form' => $form->createView(),
         ]);
     }
     #[Route('/service', name: 'app_service')]

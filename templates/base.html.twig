@@ -1,74 +1,114 @@
 <!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Mon Site
+			{% endblock %}
+		</title>
 
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link rel="stylesheet" href="{{ asset('build/app.css') }}">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>
-		{% block title %}Mon Site
+		{% block stylesheets %}
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 		{% endblock %}
-	</title>
 
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-	<link rel="stylesheet" href="{{ asset('build/app.css') }}">
-	{% block stylesheets %}
+		{% block javascripts %}
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+const toggleButton = document.getElementById("darkModeToggle");
+const body = document.body;
 
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-	{% endblock %}
+if (! toggleButton) 
+return;
 
 
-	{% block javascripts %}
-		{% block importmap %}
-			{{ importmap('app') }}
+
+// Vérifie si le bouton existe pour éviter les erreurs
+
+// Appliquer le mode sombre si activé précédemment
+if (localStorage.getItem("darkMode") === "enabled") {
+body.classList.add("dark-mode");
+toggleButton.innerText = "☀️ Mode Clair";
+}
+
+toggleButton.addEventListener("click", function () {
+body.classList.toggle("dark-mode");
+
+if (body.classList.contains("dark-mode")) {
+localStorage.setItem("darkMode", "enabled");
+toggleButton.innerText = "☀️ Mode Clair";
+} else {
+localStorage.setItem("darkMode", "disabled");
+toggleButton.innerText = "🌙 Mode Sombre";
+}
+});
+});
+			</script>
+
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 		{% endblock %}
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-	{% endblock %}
-	<script src="{{ asset('build/app.js') }}" defer></script>
+		<script src="{{ asset('build/app.js') }}" defer></script>
+	</head>
+
+	<body>
 
 
-</head>
+		{# navbar #}
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ path('app_home') }}"><img width="80" src="assets/images/AS.png" alt="logo as'elec"></a>
 
-<body>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-	{# navbar #}
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_service') }}">Service</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_devis') }}">Devis</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_realisation') }}">Réalisation</a>
+						</li>
+						{% if is_granted('ROLE_USER')%}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_liste') }}">Mes Devis</a>
+							</li>
+						{% endif %}
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light ">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="{{ path('app_home') }}"><img width="80" src="assets/images/AS.png" alt="logo as'elec"></a>
+						{# <li class="nav-item">
+																																					<a class="nav-link" href="{{ path('app_profile') }}">Profil</a>
+																																				</li> #}
 
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_service') }}">Service</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_devis') }}">Devis</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_realisation') }}">Réalisation</a>
-					</li>
-				</ul>
+					</ul>
+				</div>
 			</div>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+
 			<!-- Section Admin (toujours visible sur ordinateur) -->
 			<div class="d-none d-lg-flex align-items-center ms-auto">
-				<ul
-					class="navbar-nav">
-					<!-- Dropdown pour Admin et Déconnexion -->
+				<ul class="navbar-nav">
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<i class="bi bi-person-lock"></i>
-							<span class="ms-1">Admin</span>
+							<span class="ms-1">Plus</span>
+
 						</a>
+
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							{% if is_granted('ROLE_ADMIN')  %}
+							{% if is_granted('ROLE_ADMIN') %}
 								<li>
 									<a class="dropdown-item" href="logout">
 										<i class="bi bi-box-arrow-right"></i>
@@ -81,16 +121,17 @@
 										<i class="bi bi-person-lock"></i>
 										Espace Admin
 									</a>
+									<button id="darkModeToggle" class="btn btn-dark">🌙 Mode Sombre</button>
+
 								</li>
 							{% endif %}
-
 						</ul>
 					</li>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</body></div><!-- Menu burger pour mobile --><div class="d-lg-none">
+				</ul>
+			</div>
+		</div>
+	</body>
+</html></nav><!-- Menu burger pour mobile --><div class="d-lg-none">
 <button class="navbar-toggler position-absolute top-0 end-0 m-3" type="button" data-bs-toggle="collapse" data-bs-target="#adminMenu"></button>
 <div class="collapse navbar-collapse" id="adminMenu">
 	<ul class="navbar-nav">
@@ -111,22 +152,20 @@
 			</li>
 		{% endif %}
 	</ul>
-</div></div></body></div></nav><div class="container"><div class="bg-white p-3 rounded shadow-sm"><h1 class="text-center mt-4">Électricité Générale à Strasbourg</h1><p class="text-center">Votre partenaire pour des installations électriques sûres et fiables.</p></div>{# <header class="header-bg">
-																																																																																																													<h1>AS'Elec - Électricité Générale à Strasbourg</h1>
-																																																																																																													<br>
-																																																																																																													<p>Votre partenaire pour des installations électriques sûres et fiables.</p>
-																																																																																																											
-																																																																																																													<nav class="navbar bg-primary w-100 d-flex justify-content-center" data-bs-theme="dark">
-																																																																																																											
-																																																																																																														<a href="{{ path('app_service') }}" class="mx-3 text-white">Service</a>
-																																																																																																														<a href="contact" class="mx-3 text-white">Contact</a>
-																																																																																																														<a href="devis" class="mx-3 text-white">Devis</a>
-																																																																																																														<a href="realisation" class="mx-3 text-white">Réalisations</a>
-																																																																																																													</nav>
-																																																																																																												</header> #}{# <a href="{{ path('home_acceuil') }}" class="btn btn-outline-light position-absolute top-0 end-0 m-3">
-																																																																																																																🏠 Retour à l'accueil
-																																																																																																															</a> #}<div class="container"> {% block body %}{% endblock %}<footer><div class="contact" id="contact">
-<h2>Contactez-nous</h2>
-<p>Téléphone : 07 23 45 67 89</p>
-<p>Email : contact@gmail.com</p>
-<p>Adresse : 123 Rue de l'Énergie, 67100 Strasbourg</p></div></div></footer></body></body></html>
+</div></div><div class="container">
+<div class="bg-white p-3 rounded shadow-sm">
+	<h1 class="text-center mt-4">Électricité Générale à Strasbourg</h1>
+	<p class="text-center">Votre partenaire pour des installations électriques sûres et fiables.</p>
+</div>
+
+{% block body %}{% endblock %}</div><footer>
+<div class="contact" id="contact">
+	<h2>Contactez-nous</h2>
+	<p>Téléphone : 07 23 45 67 89</p>
+	<p>Email : contact@gmail.com</p>
+	<p>Adresse : 123 Rue de l'Énergie, 67100 Strasbourg</p>
+	<div>
+		<p>&copy; 2021 AS'elec - Tous droits réservés</p>
+	</div>
+
+</div></footer></body></html>

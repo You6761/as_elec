@@ -1,22 +1,24 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Liste des demandes de devis
 {% endblock %}
+
 {% block body %}
 	<div class="container mt-5">
 		<h2 class="text-center mb-4">Liste des demandes de devis</h2>
 		<div class="card p-4 shadow-lg">
 			<table class="table table-striped">
-				<thead>
+				<thead class="table-dark">
 					<tr>
 						<th scope="col">Nom</th>
 						<th scope="col">Prénom</th>
 						<th scope="col">Ville</th>
 						<th scope="col">Adresse</th>
 						<th scope="col">Numéro</th>
-						<th scope="col">Description des travaux</th>
+						<th scope="col">Description</th>
 						<th scope="col">Type de logement</th>
-						<th scope="col">Estimation des travaux</th>
-						<th scope="col">Plus de détails</th>
+						<th scope="col">Estimation</th>
+						<th scope="col">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,11 +32,20 @@
 							<td>{{ demande.descriptionTravaux }}</td>
 							<td>{{ demande.typeHabitat }}</td>
 							<td>{{ demande.estimationTravaux }}</td>
-							<td>{{ demande.plusDeDetails }}</td>
+							<td>
+								<form action="{{ path('app_devis_delete', {'id': demande.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');">
+									<button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+								</form>
+								<a href="{{ path('app_devis_show', {'id': demande.id}) }}" class="btn btn-info btn-sm">Afficher</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="9" class="text-center">Aucune demande de devis trouvée.</td>
 						</tr>
 					{% endfor %}
 				</tbody>
-			</tbody>
-		</table>
+			</table>
+		</div>
 	</div>
-</div>{% endblock %}
+{% endblock %}

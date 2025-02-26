@@ -1,3 +1,7 @@
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -93,3 +97,64 @@ body {
     color: rgb(12, 12, 12);
     visibility: visible!important;
 }
+/* Mode Sombre Global */
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Navbar */
+.dark-mode .navbar {
+    background-color: #222 !important;
+    border-bottom: 1px solid #444;
+}
+
+.dark-mode .navbar a {
+    color: #ddd !important;
+}
+
+.dark-mode .navbar a:hover {
+    color: #fff !important;
+}
+
+/* Boutons */
+.dark-mode .btn {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+.dark-mode .btn:hover {
+    background-color: #444;
+}
+
+/* Liens */
+.dark-mode a {
+    color: #bbb !important;
+}
+
+.dark-mode a:hover {
+    color: #fff !important;
+}
+
+/* Conteneurs */
+.dark-mode .container,
+.dark-mode .bg-white {
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Footer */
+.dark-mode footer {
+    background-color: #181818;
+    color: #aaa;
+    padding: 20px;
+}
+
+.dark-mode footer p {
+    color: #ccc;
+}
+
+
