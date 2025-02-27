@@ -2,35 +2,27 @@
 
 namespace App\Service;
 
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Database;
 
 class FirebaseService
 {
-  private $client;
-  private $firebaseUrl;
-  public function __construct(HttpClientInterface $client)
+  private Database $database;
+
+  public function __construct()
   {
-    $this->client = $client;
-    $this->firebaseUrl = 'https://aselec-5880b-default-rtdb.europe-west1.firebasedatabase.app/';
+    $factory = (new Factory)
+      ->withServiceAccount(__DIR__ . '/../../config/firebase_credentials.json')
+      ->withDatabaseUri('https://aselec2-ee07c-default-rtdb.europe-west1.firebasedatabase.app/');
+
+    $this->database = $factory->createDatabase();
   }
-  public function addcontact(string $name, string $email, string $message): string
+
+  public function sendContactData(array $data): void
   {
-    $data = [
-      'name' => $name,
-      'email' => $email,
-      'message' => $message,
-    ];
-
-    $response = $this->client->request('POST', $this->firebaseUrl, [
-      'json' => $data,
-      'verify_peer' => false,
-      'verify_host' => false,
-    ]);
-
-    $statusCode = $response->getStatusCode();
-    if ($statusCode === 200) {
-      return "Avis ajouté avec succès!";
-    }
-    return "Erreur lors de l'ajout de l'avis.";
+    // On pousse les données dans la collection "contacts"
+    $this->database
+      ->getReference('contacts')
+      ->push($data);
   }
 }

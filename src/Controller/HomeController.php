@@ -7,8 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Service\FirebaseService;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\FirebaseService;
+use Doctrine\ORM\EntityManagerInterface;
 
 final class HomeController extends AbstractController
 {
@@ -18,73 +21,60 @@ final class HomeController extends AbstractController
     {
         $this->firebaseService = $firebaseService;
     }
-    #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
-    public function contact(Request $request): Response
+    #[Route('/contact', name: 'app_contact')]
+    public function contact(Request $request, EntityManagerInterface $em, FirebaseService $firebaseService): Response
     {
-        $form = $this->createForm(ContactType::class);
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $this->firebaseService->addcontact($data['name'], $data['email'], $data['message']);
+            // Sauvegarde dans la base de données locale
+            //$em->persist($contact);
+            //$em->flush();
 
-            $response = $this->contact->request(
-                'POST',
-                'https://aselec-5880b-default-rtdb.europe-west1.firebasedatabase.app/',
-                [
-                    'json' => [
-                        'name' => $data['name'],
-                        'email' => $data['email'],
-                        'message' => $data['message'],
-                    ],
-                ]
+            // Préparez les données à envoyer à Firebase
+            $data = [
+                'name'    => $contact->getName(),
+                'email'   => $contact->getEmail(),
+                'message' => $contact->getMessage(),
+            ];
 
-            );
+            // Envoi des données à Firebase
+            $firebaseService->sendContactData($data);
+
+            $this->addFlash('success', 'Votre message a bien été envoyé et enregistré sur Firebase.');
+
             return $this->redirectToRoute('app_contact');
         }
         return $this->render('contact.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
     #[Route('/service', name: 'app_service')]
     public function service(): Response
     {
-        return $this->render('service.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('service.html.twig');
     }
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('home/acceuil.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('home/accueil.html.twig');
     }
     #[Route('/realisation', name: 'app_realisation')]
     public function realisation(): Response
     {
-        return $this->render('home/realisation.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('home/realisation.html.twig');
     }
     #[Route('/engagement', name: 'app_engagement')]
     public function engagement(): Response
     {
-        return $this->render('engagement.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('engagement.html.twig');
     }
-    #[Route('/', name: 'home_acceuil')]
-    public function acceuil(): Response
-    {
-        return $this->render('home/acceuil.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+
     #[Route('/login', name: 'app_login')]
     public function login(): Response
     {
-        return $this->render('home/login.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('home/login.html.twig');
     }
 }

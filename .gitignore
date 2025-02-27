@@ -25,4 +25,4 @@
 ###< symfony/asset-mapper ###
 
 mysql/mysql.sock
-.gitignore
+/config/firebase_credentials.json
